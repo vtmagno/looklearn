@@ -18,6 +18,10 @@
                         <li class="nav navbar-nav">
                             <a class="nav-link" href="/home">Home</a>
                         </li>
+
+                        <li class="nav navbar-nav">
+                            <a class="nav-link" href="/showprofile">Profile</span></a>
+                        </li>
                 
                         <li class="nav navbar-nav">
                             <a class="nav-link" href="/chat">Messages</span></a>
@@ -29,6 +33,14 @@
                 
                         <li class="nav navbar-nav">
                                 <a class="nav-link" href="/about">About</span></a>
+                        </li>
+
+                        <li class="nav navbar-nav">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();">
+                             {{ __('Logout') }}
+                         </a>
                         </li>
                 
                         </ul>

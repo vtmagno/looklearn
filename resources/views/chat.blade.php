@@ -9,7 +9,7 @@
 
                 <div class="panel-body" id="app">
                     
-                    <h3>Your Messages</h3>
+                    <h1>Your Messages</h1>
                     <chat-app user="\Auth::user()"></chat-app>
 
                 </div>

@@ -40,7 +40,7 @@
 
         <hr>
 
-        <a href="/email"><p>Feeling confident? Send {{$post->user['email']}} an email about your proposal and start learning together!</p></a>
+        <a href="/chat"><p>Feeling confident? Send {{$post->user['name']}} a message about your proposal and start learning together!</p></a>
 
     </div>
 

@@ -39,11 +39,16 @@ Route::get('/about', 'PagesController@about');
 //Route::get('/posts', 'PagesController@posts');
 
 Route::resource('posts', 'PostsController');
+
+Route::resource('user', 'ProfileController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/contacts', 'ContactsController@get');
+
+Route::get('/showprofile', 'ProfileController@index');
 
 Route::get('/chat', 'HomeController@chat');
 
