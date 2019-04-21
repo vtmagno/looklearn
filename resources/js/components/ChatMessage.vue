@@ -62,11 +62,11 @@ export default {
         },
 
         handleIncoming(message) {
-            if (this.selectedContact && message.from == this.selectedContact.id) {
-                this.saveNewMessage(message);
-                return;
-            }
-            this.updateUnreadCount(message.from_contact, false);
+                if (this.selectedContact && message.from == this.selectedContact.id) {
+                    this.saveNewMessage(message);
+                    return;
+                }
+            alert(message.text);
         },
 
     },

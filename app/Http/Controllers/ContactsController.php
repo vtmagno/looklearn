@@ -39,7 +39,7 @@ class ContactsController extends Controller
             'to' => $request->contact_id,
             'text' => $request->text
         ]);
-        //broadcast(new newMessage($message));
+        broadcast(new newMessage($message));
         return response()->json($message);
     }
 }

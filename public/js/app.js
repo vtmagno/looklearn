@@ -1799,7 +1799,6 @@ __webpack_require__.r(__webpack_exports__);
       _this.handleIncoming(e.message);
     });
     axios.get('/contacts').then(function (response) {
-      console.log("pumasok");
       _this.contacts = response.data;
     });
   },
@@ -1821,7 +1820,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      this.updateUnreadCount(message.from_contact, false);
+      alert(message.text);
     }
   },
   components: {
@@ -6579,7 +6578,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".feed[data-v-0ecf4eaa] {\n  background: #efefef;\n  height: 100%;\n  max-height: 470px;\n  overflow: scroll;\n}\n.feed ul[data-v-0ecf4eaa] {\n  list-style-type: none;\n  padding: 5px;\n}\n.feed li.message[data-v-0ecf4eaa] {\n  margin: 10px 0;\n  width: 100px;\n}\n.feed li .text[data-v-0ecf4eaa] {\n  max-width: 200px;\n  border-radius: 5px;\n  padding: 12px;\n  display: inline-block;\n}\n.feed li.received[data-v-0ecf4eaa] {\n  text-align: right;\n}\n.feed li.received .text[data-v-0ecf4eaa] {\n  background: lightblue;\n}\n.feed li.sent[data-v-0ecf4eaa] {\n  text-align: left;\n}\n.feed li.sent .text[data-v-0ecf4eaa] {\n  background: gray;\n}", ""]);
+exports.push([module.i, ".feed[data-v-0ecf4eaa] {\n  background: #f0f0f0;\n  height: 100%;\n  max-height: 470px;\n  overflow: scroll;\n}\n.feed ul[data-v-0ecf4eaa] {\n  list-style-type: none;\n  padding: 5px;\n}\n.feed ul li.message[data-v-0ecf4eaa] {\n  margin: 10px 0;\n  width: 100%;\n}\n.feed ul li.message .text[data-v-0ecf4eaa] {\n  max-width: 200px;\n  border-radius: 5px;\n  padding: 12px;\n  display: inline-block;\n}\n.feed ul li.message.received[data-v-0ecf4eaa] {\n  text-align: right;\n}\n.feed ul li.message.received .text[data-v-0ecf4eaa] {\n  background: #b2b2b2;\n}\n.feed ul li.message.sent[data-v-0ecf4eaa] {\n  text-align: left;\n}\n.feed ul li.message.sent .text[data-v-0ecf4eaa] {\n  background: #81c4f9;\n}", ""]);
 
 // exports
 
@@ -48533,7 +48532,7 @@ var render = function() {
                 key: message.id,
                 class:
                   "message" +
-                  (message.to == _vm.contact.id ? "sent" : "received")
+                  (message.to == _vm.contact.id ? " sent" : " received")
               },
               [
                 _c("div", { staticClass: "text" }, [
