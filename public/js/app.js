@@ -48532,7 +48532,7 @@ var render = function() {
                 key: message.id,
                 class:
                   "message" +
-                  (message.to == _vm.contact.id ? " sent" : " received")
+                  (message.to == _vm.contact.id ? " received" : " sent")
               },
               [
                 _c("div", { staticClass: "text" }, [
