@@ -1795,7 +1795,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    Echo["private"]("messages.".concat(this.user.id)).listen('NewMessage', function (e) {
+    Echo["private"]("messages.".concat(this.user.id)).listen('newMessage', function (e) {
       _this.handleIncoming(e.message);
     });
     axios.get('/contacts').then(function (response) {
@@ -48522,7 +48522,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "feed" }, [
+  return _c("div", { ref: "feed", staticClass: "feed" }, [
     _vm.contact
       ? _c(
           "ul",

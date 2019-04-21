@@ -34,7 +34,7 @@ export default {
     mounted(){
 
         Echo.private(`messages.${this.user.id}`)
-        .listen('NewMessage', (e) => {
+        .listen('newMessage', (e) => {
         this.handleIncoming(e.message);
         });
 
