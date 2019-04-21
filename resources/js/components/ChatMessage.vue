@@ -2,7 +2,7 @@
 
     <div class="chat-app">
 
-        <Conversation :contact="SelectedContact" :messages="messages"/>
+        <Conversation :contact="selectedContact" :messages="messages" @new="saveNewMessage"/>
         <ContactsList :contacts="contacts" @selected="startConversationWith"/>
 
     </div>
@@ -35,18 +35,21 @@ export default {
 
         axios.get('/contacts')
         .then(response=>{
-            console.log(response.data);
+            console.log("pumasok");
             this.contacts = response.data;
         });
     },
+    
 
     methods: {
         startConversationWith(contact){
-            axios.get('/conversation/${contact.id')
-            .then(response=>{
-                this.messages = response.data;
-                this.selectedContact = contact;
-            });
+                axios.get(`/conversation/${contact.id}`)
+                    .then((response) => {
+
+                        
+                        this.messages = response.data;
+                        this.selectedContact = contact;
+                    })
         }
 
     },

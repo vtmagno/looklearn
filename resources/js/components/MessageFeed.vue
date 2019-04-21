@@ -33,3 +33,19 @@
     }
 
 </script>
+
+<style lang="scss" scoped>
+
+.feed{
+    background: #efefef;
+    height: 100%;
+    max-height: 470px;
+    overflow: scroll;
+    
+    ul {
+        list-style-type: none;
+        padding: 5px;
+    }
+}
+
+</style>
