@@ -1870,13 +1870,26 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      selected: 0
+      selected: this.contacts.length ? this.contacts[0] : null
     };
   },
   methods: {
     selectContact: function selectContact(contact) {
       this.selected = contact;
       this.$emit('selected', contact);
+    }
+  },
+  computed: {
+    sortedContacts: function sortedContacts() {
+      var _this = this;
+
+      return _.sortBy(this.contacts, [function (contact) {
+        if (contact == _this.selected) {
+          return Infinity;
+        }
+
+        return contact.unread;
+      }]).reverse();
     }
   }
 });
@@ -6521,7 +6534,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".contacts-list[data-v-484f3208] {\n  flex: 5;\n}\n.contacts-list ul[data-v-484f3208] {\n  text-align: center;\n  list-style-type: none;\n  padding-left: 0;\n  max-height: 600px;\n  overflow: scroll;\n  border-left: 1px solid #efefef;\n}\n.contacts-list li[data-v-484f3208] {\n  text-align: center;\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid #efefef;\n  height: 60px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list li.selected[data-v-484f3208] {\n  background-color: #efefef;\n}\n.contacts-list li .avatar[data-v-484f3208] {\n  flex: 1;\n  display: flex;\n  align-items: center;\n}\n.contacts-list li .avatar img[data-v-484f3208] {\n  width: 35px;\n  border-radius: 50%;\n  margin: 0 auto;\n}\n.contacts-list li .contact[data-v-484f3208] {\n  flex: 3;\n  font-size: 10px;\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.contacts-list li .contact p[data-v-484f3208] {\n  margin: 0 auto;\n}\n.contacts-list li .dot[data-v-484f3208] {\n  height: 50px;\n  width: 50px;\n  background-color: #bbb;\n  border-radius: 50%;\n}", ""]);
+exports.push([module.i, ".contacts-list[data-v-484f3208] {\n  flex: 4;\n  max-height: 600px;\n  overflow: scroll;\n  border-left: 1px solid #a6a6a6;\n}\n.contacts-list ul[data-v-484f3208] {\n  text-align: center;\n  list-style-type: none;\n  padding-left: 0;\n}\n.contacts-list ul li[data-v-484f3208] {\n  display: flex;\n  padding: 2px;\n  border-bottom: 1px solid #efefef;\n  height: 60px;\n  position: relative;\n  cursor: pointer;\n}\n.contacts-list ul li.selected[data-v-484f3208] {\n  background-color: #efefef;\n}\n.contacts-list ul li span.unread[data-v-484f3208] {\n  background: palevioletred;\n  color: #fff;\n  position: absolute;\n  right: 11px;\n  top: 20px;\n  display: flex;\n  font-weight: 700;\n  min-width: 20px;\n  justify-content: center;\n  align-items: center;\n  line-height: 20px;\n  font-size: 12px;\n  padding: 0 4px;\n  border-radius: 3px;\n}\n.contacts-list ul li .avatar[data-v-484f3208] {\n  flex: 0;\n  display: flex;\n}\n.contacts-list ul li .avatar img[data-v-484f3208] {\n  width: 35px;\n  border-radius: 50%;\n  margin: 0 auto;\n}\n.contacts-list ul li .contact[data-v-484f3208] {\n  flex: 15;\n  font-size: 10px;\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n}\n.contacts-list ul li .contact p[data-v-484f3208] {\n  margin: 0 auto;\n}\n.contacts-list ul li .contact.name[data-v-484f3208] {\n  font-weight: bold;\n}\n.contacts-list ul li .dot[data-v-484f3208] {\n  height: 50px;\n  width: 50px;\n  background-color: #bbb;\n  border-radius: 50%;\n}", ""]);
 
 // exports
 
@@ -48366,7 +48379,7 @@ var render = function() {
   return _c("div", { staticClass: "contacts-list" }, [
     _c(
       "ul",
-      _vm._l(_vm.contacts, function(contact) {
+      _vm._l(_vm.sortedContacts, function(contact) {
         return _c(
           "li",
           {
@@ -48382,14 +48395,22 @@ var render = function() {
             _vm._m(0, true),
             _vm._v(" "),
             _c("div", { staticClass: "contact" }, [
-              _c("p", { staticClass: "name" }, [_vm._v(_vm._s(contact.name))]),
+              _c("p", { staticClass: "name" }, [
+                _c("b", [_vm._v(_vm._s(contact.name))])
+              ]),
               _vm._v(" "),
               _c("p", { staticClass: "username" }, [
                 _vm._v(_vm._s(contact.username))
               ]),
               _vm._v(" "),
               _c("p", { staticClass: "email" }, [_vm._v(_vm._s(contact.email))])
-            ])
+            ]),
+            _vm._v(" "),
+            contact.unread
+              ? _c("span", { staticClass: "unread" }, [
+                  _vm._v(_vm._s(contact.unread))
+                ])
+              : _vm._e()
           ]
         )
       }),

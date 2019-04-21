@@ -2,22 +2,22 @@
 
     <div class="contacts-list">
         <ul>
-            <li v-for="contact in contacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
+            <li v-for="contact in sortedContacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
                 <div class="avatar">
                     <span class="dot"></span>
                 </div>
                 <div class="contact">
-                    <p class="name">{{ contact.name }}</p>
+                    <p class="name"><b>{{ contact.name }}</b></p>
                     <p class="username">{{ contact.username }}</p>
                     <p class="email">{{ contact.email }}</p>
                 </div>
-
+                <span class="unread" v-if="contact.unread">{{ contact.unread }}</span>
             </li>
         </ul>
     </div>
 </template>
 
-</template>
+
 
 <script>
     export default{
@@ -32,7 +32,7 @@
 
         data(){
             return {
-                selected: 0
+                selected: this.contacts.length ? this.contacts[0] : null
             };
 
         },
@@ -42,29 +42,38 @@
                 this.selected = contact;
                 this.$emit('selected', contact);
             }
-        }
+        },
         
+       computed: {
+            sortedContacts() {
+                return _.sortBy(this.contacts, [(contact) => {
+                    if (contact == this.selected) {
+                        return Infinity;
+                    }
+                    return contact.unread;
+                }]).reverse();
+            }
+        }
     }
-
 </script>
 
 <style lang="scss" scoped>
 
 .contacts-list{
-    flex: 5;
+    flex: 4;
+        max-height: 600px;
+        overflow: scroll;
+        border-left: 1px solid #a6a6a6;
 
     ul {
         text-align:center;
         list-style-type: none;
         padding-left: 0;
-        max-height:600px;
-        overflow: scroll;
-        border-left: 1px solid #efefef;
-    }
+    
 
     li{
-        text-align:center;
         display: flex;
+        
         padding: 2px;
         border-bottom: 1px solid #efefef;
         height: 60px;
@@ -75,10 +84,26 @@
             background-color: #efefef;
         }
 
-        .avatar {
-            flex: 1;
+        span.unread {
+            background: palevioletred;
+            color: #fff;
+            position: absolute;
+            right: 11px;
+            top: 20px;
             display: flex;
+            font-weight: 700;
+            min-width: 20px;
+            justify-content: center;
             align-items: center;
+            line-height: 20px;
+            font-size: 12px;
+            padding: 0 4px;
+            border-radius: 3px;
+        }
+
+        .avatar {
+            flex: 0;
+            display: flex;
 
             img {
                 width: 35px;
@@ -89,20 +114,23 @@
         }
 
         .contact {
-            flex: 3;
+            flex: 15;
             font-size: 10px;
             overflow: hidden;
             display: flex; 
             flex-direction: column;
-            justify-content: center;
+
+            p {
+                margin: 0 auto;
+            }
+
+            &.name {
+                        font-weight: bold;
+                    }
             
         }
 
-        .contact p {
-                margin: 0 auto;
-        }
-
-                .dot {
+        .dot {
         height: 50px;
         width: 50px;
         background-color: #bbb;
@@ -110,7 +138,7 @@
         }
 
 
-
+    }
     }
 
 }
