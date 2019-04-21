@@ -50,7 +50,11 @@ export default {
                         this.messages = response.data;
                         this.selectedContact = contact;
                     })
-        }
+        },
+
+        saveNewMessage(message) {
+             this.messages.push(message);
+        },
 
     },
     components: {Conversation, ContactsList}

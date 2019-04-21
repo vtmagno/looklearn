@@ -18,20 +18,32 @@
 </template>
 
 <script>
-
-    export default{
+    export default {
         props: {
             contact: {
-                type: Object,
+                type: Object
             },
-            messages :{
+            messages: {
                 type: Array,
                 required: true
             }
+        },
+        methods: {
+            scrollToBottom() {
+                setTimeout(() => {
+                    this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight - this.$refs.feed.clientHeight;
+                }, 50);
+            }
+        },
+        watch: {
+            contact(contact) {
+                this.scrollToBottom();
+            },
+            messages(messages) {
+                this.scrollToBottom();
+            }
         }
-
     }
-
 </script>
 
 <style lang="scss" scoped>
@@ -45,6 +57,36 @@
     ul {
         list-style-type: none;
         padding: 5px;
+    }
+
+    li {
+        &.message{
+        margin: 10px 0;
+        width: 100px;
+        }
+
+        .text{
+            max-width: 200px;
+            border-radius: 5px;
+            padding: 12px;
+            display: inline-block;
+        }
+
+        &.received{
+        text-align: right;
+
+            .text{
+            background: lightblue;
+            }
+        }
+
+        &.sent{
+        text-align: left;
+
+            .text{
+            background: gray;
+            }
+        }
     }
 }
 

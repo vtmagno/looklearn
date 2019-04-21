@@ -1808,6 +1808,9 @@ __webpack_require__.r(__webpack_exports__);
         _this2.messages = response.data;
         _this2.selectedContact = contact;
       });
+    },
+    saveNewMessage: function saveNewMessage(message) {
+      this.messages.push(message);
     }
   },
   components: {
@@ -1909,7 +1912,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sendMessage: function sendMessage(text) {
-      console.log(text);
+      var _this = this;
+
+      if (!this.contact) {
+        return;
+      }
+
+      axios.post('/conversation/send', {
+        contact_id: this.contact.id,
+        text: text
+      }).then(function (response) {
+        _this.$emit('new', response.data);
+      });
     }
   },
   components: {
@@ -1996,6 +2010,23 @@ __webpack_require__.r(__webpack_exports__);
     messages: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    scrollToBottom: function scrollToBottom() {
+      var _this = this;
+
+      setTimeout(function () {
+        _this.$refs.feed.scrollTop = _this.$refs.feed.scrollHeight - _this.$refs.feed.clientHeight;
+      }, 50);
+    }
+  },
+  watch: {
+    contact: function contact(_contact) {
+      this.scrollToBottom();
+    },
+    messages: function messages(_messages) {
+      this.scrollToBottom();
     }
   }
 });
@@ -6535,7 +6566,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".feed[data-v-0ecf4eaa] {\n  background: #efefef;\n  height: 100%;\n  max-height: 470px;\n  overflow: scroll;\n}\n.feed ul[data-v-0ecf4eaa] {\n  list-style-type: none;\n  padding: 5px;\n}", ""]);
+exports.push([module.i, ".feed[data-v-0ecf4eaa] {\n  background: #efefef;\n  height: 100%;\n  max-height: 470px;\n  overflow: scroll;\n}\n.feed ul[data-v-0ecf4eaa] {\n  list-style-type: none;\n  padding: 5px;\n}\n.feed li.message[data-v-0ecf4eaa] {\n  margin: 10px 0;\n  width: 100px;\n}\n.feed li .text[data-v-0ecf4eaa] {\n  max-width: 200px;\n  border-radius: 5px;\n  padding: 12px;\n  display: inline-block;\n}\n.feed li.received[data-v-0ecf4eaa] {\n  text-align: right;\n}\n.feed li.received .text[data-v-0ecf4eaa] {\n  background: lightblue;\n}\n.feed li.sent[data-v-0ecf4eaa] {\n  text-align: left;\n}\n.feed li.sent .text[data-v-0ecf4eaa] {\n  background: gray;\n}", ""]);
 
 // exports
 
