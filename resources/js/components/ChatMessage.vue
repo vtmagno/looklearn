@@ -33,6 +33,11 @@ export default {
     },
     mounted(){
 
+        Echo.private(`messages.${this.user.id}`)
+        .listen('NewMessage', (e) => {
+        this.handleIncoming(e.message);
+        });
+
         axios.get('/contacts')
         .then(response=>{
             console.log("pumasok");
@@ -54,6 +59,14 @@ export default {
 
         saveNewMessage(message) {
              this.messages.push(message);
+        },
+
+        handleIncoming(message) {
+            if (this.selectedContact && message.from == this.selectedContact.id) {
+                this.saveNewMessage(message);
+                return;
+            }
+            this.updateUnreadCount(message.from_contact, false);
         },
 
     },

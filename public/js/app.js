@@ -1795,6 +1795,9 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    Echo["private"]("messages.".concat(this.user.id)).listen('NewMessage', function (e) {
+      _this.handleIncoming(e.message);
+    });
     axios.get('/contacts').then(function (response) {
       console.log("pumasok");
       _this.contacts = response.data;
@@ -1811,6 +1814,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     saveNewMessage: function saveNewMessage(message) {
       this.messages.push(message);
+    },
+    handleIncoming: function handleIncoming(message) {
+      if (this.selectedContact && message.from == this.selectedContact.id) {
+        this.saveNewMessage(message);
+        return;
+      }
+
+      this.updateUnreadCount(message.from_contact, false);
     }
   },
   components: {
@@ -60777,8 +60788,8 @@ if (token) {
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "",
-  cluster: "mt1",
+  key: "883d1563aec43262250a",
+  cluster: "ap1",
   encrypted: true
 });
 
