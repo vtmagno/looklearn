@@ -1799,6 +1799,7 @@ __webpack_require__.r(__webpack_exports__);
       _this.handleIncoming(e.message);
     });
     axios.get('/contacts').then(function (response) {
+      console.log("pumasok");
       _this.contacts = response.data;
     });
   },
@@ -1813,14 +1814,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     saveNewMessage: function saveNewMessage(message) {
       this.messages.push(message);
+      console.log("pasok");
     },
     handleIncoming: function handleIncoming(message) {
       if (this.selectedContact && message.from == this.selectedContact.id) {
         this.saveNewMessage(message);
         return;
       }
-
-      alert(message.text);
     }
   },
   components: {

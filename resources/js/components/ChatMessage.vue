@@ -59,14 +59,16 @@ export default {
 
         saveNewMessage(message) {
              this.messages.push(message);
+             console.log("pasok");
         },
 
         handleIncoming(message) {
+
                 if (this.selectedContact && message.from == this.selectedContact.id) {
-                    this.saveNewMessage(message);
+                    this.saveNewMessage(message);                    
                     return;
                 }
-            alert(message.text);
+            
         },
 
     },

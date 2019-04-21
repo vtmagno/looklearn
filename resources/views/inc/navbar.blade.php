@@ -20,7 +20,7 @@
                         </li>
                 
                         <li class="nav navbar-nav">
-                            <a class="nav-link" href="/profile">Profile</span></a>
+                            <a class="nav-link" href="/chat">Messages</span></a>
                         </li>
                 
                         <li class="nav navbar-nav">
