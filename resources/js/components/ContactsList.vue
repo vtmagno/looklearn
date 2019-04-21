@@ -1,31 +1,21 @@
 <template>
 
     <div class="contacts-list">
-
-
-
         <ul>
-
-            <li v-for="(contact, index) in contacts" :key="contact.id" @click="selectContact(index, contact)" :class="{'selected': index == selected}">
-            
-            <div class="avatar">
-
-                <span class="dot"></span>
-
-            </div>
-            
-            
-            <div class="contact">
-                <p class='name'>{{contact.name}}</p>
-                <p class='name'><i>Username:{{contact.username}}</i></p>
-            </div>   
-        
+            <li v-for="contact in contacts" :key="contact.id" @click="selectContact(contact)" :class="{ 'selected': contact == selected }">
+                <div class="avatar">
+                    <span class="dot"></span>
+                </div>
+                <div class="contact">
+                    <p class="name">{{ contact.name }}</p>
+                    <p class="username">{{ contact.username }}</p>
+                    <p class="email">{{ contact.email }}</p>
+                </div>
 
             </li>
         </ul>
-
-
     </div>
+</template>
 
 </template>
 
@@ -48,11 +38,10 @@
         },
 
         methods: {
-            selectedContact(index, contact){
-                this.selected = index;
-                this.$emit('selected', contact)
+            selectContact(contact){
+                this.selected = contact;
+                this.$emit('selected', contact);
             }
-
         }
         
     }
@@ -81,6 +70,10 @@
         height: 60px;
         position: relative;
         cursor: pointer;
+
+        &.selected{
+            background-color: #efefef;
+        }
 
         .avatar {
             flex: 1;
@@ -119,9 +112,6 @@
 
 
     }
-
-
-
 
 }
 
