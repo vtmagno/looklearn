@@ -3,7 +3,7 @@
     <div class="chat-app">
 
         <Conversation :contact="SelectedContact" :messages="messages"/>
-        <ContactsList :contacts="contacts"/>
+        <ContactsList :contacts="contacts" @selected="startConversationWith"/>
 
     </div>
 
@@ -33,15 +33,33 @@ export default {
     },
     mounted(){
 
-        console.log(this.user);
         axios.get('/contacts')
         .then(response=>{
             console.log(response.data);
             this.contacts = response.data;
         });
     },
+
+    methods: {
+        startConversationWith(contact){
+            axios.get('/conversation/${contact.id')
+            .then(response=>{
+                this.messages = response.data;
+                this.selectedContact = contact;
+            });
+        }
+
+    },
     components: {Conversation, ContactsList}
 
 }
 
 </script>
+
+<style lang="scss" scoped>
+
+.chat-app{
+    display: flex;
+}
+
+</style>
