@@ -119,7 +119,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', '8rxuY3/hLvQjFB0BeXA9I8pl52lrIYU9Klc2GvqWp/c='),
+    'key' => env('APP_KEY', 'base64:8rxuY3/hLvQjFB0BeXA9I8pl52lrIYU9Klc2GvqWp/c='),
 
     
 
