@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+        //$this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     public function index()
     {
         $user_id = auth()->user()->id;
