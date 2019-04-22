@@ -36,7 +36,7 @@
     <script>
         CKEDITOR.replace('article-ckeditor');
     </script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ secure_asset('js/app.js') }}"></script>
 
 </body>
 </html>
