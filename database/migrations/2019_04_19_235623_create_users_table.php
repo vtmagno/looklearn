@@ -28,7 +28,6 @@ class CreateUsersTable extends Migration
             $table->string('specialization1');
             $table->string('specialization2');
             $table->string('specialization3');
-            $table->mediumText('password_confirmation');
             $table->timestamps();
         });
     }
