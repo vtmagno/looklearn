@@ -43,7 +43,7 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'host' => 'db4free.net',
-            'port' => '33060',
+            'port' => '3306',
             'database' => 'looklearn',
             'username' => 'vcmagno',
             'password' => '!!)$(%theathea',
